@@ -35,7 +35,7 @@ Sudoku::Sudoku(int size) : grille_(size, std::vector<int>(size, 0))
  */
 bool Sudoku::is_in_range(int a) const
 {
-    return a >= 0 && a < size();
+    return a >= 0 && a < (int) size();
 }
 
 /**
@@ -91,7 +91,7 @@ void Sudoku::set(int line, int column, int value)
         throw std::out_of_range("Column index out of range.");
     }
 
-    if (value < 1 || value > size()) {
+    if (value < 1 || value > (int) size()) {
         throw std::invalid_argument("Value must be between 1 and the grid size.");
     }
 
@@ -175,8 +175,8 @@ bool Sudoku::is_grid_valid() const
             return false;
     }
 
-    for (int i = 0; i < size(); i += root) {
-        for (int j = 0; j < size(); j += root) {
+    for (size_t i = 0; i < size(); i += root) {
+        for (size_t j = 0; j < size(); j += root) {
             if (!is_subgrid_valid(i, j))
                 return false;
         }
@@ -204,14 +204,14 @@ void Sudoku::set_seed(unsigned int seed)
 bool Sudoku::can_place(int row, int col, int value) const
 {
     // Check row
-    for (int c = 0; c < size(); ++c) {
+    for (size_t c = 0; c < size(); ++c) {
         if (grille_[row][c] == value) {
             return false;
         }
     }
 
     // Check column
-    for (int r = 0; r < size(); ++r) {
+    for (size_t r = 0; r < size(); ++r) {
         if (grille_[r][col] == value) {
             return false;
         }

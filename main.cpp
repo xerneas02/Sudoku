@@ -2,7 +2,7 @@
 #include "sudoku.hpp"
 
 int main() {
-    Sudoku sudoku(25);
+    Sudoku sudoku(16);
 
     sudoku.set_seed(42);
     sudoku.generate_random_grid();
